@@ -1,0 +1,76 @@
+body {
+  background-color: #152347;
+  background-image: url(./assets/img/bg-left.png), url(./assets/img/bg-right.png);
+  background-repeat: repeat no-repeat;
+  background-size: contain;
+  color: white;
+  font-family: 'Space Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+code {
+  background-color: rgba(0, 0, 0, 0.5);
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+#root {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+#logo-abstract {
+  bottom: 40px;
+  position: absolute;
+  right: 40px;
+  width: 350px;
+}
+
+a,
+button {
+  align-items: center;
+  -webkit-appearance: none;
+  background-color: #a11ec6;
+  border: 1px solid transparent;
+  border-color: #a11ec6;
+  border-radius: 0;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: inherit;
+  color: white;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: 'Space Mono', monospace;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+  height: 2.25em;
+  justify-content: center;
+  line-height: 1.5;
+  min-height: 60px;
+  padding-bottom: 1.125em;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-top: 1.125em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  text-size-adjust: 100%;
+  user-select: none;
+  vertical-align: top;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus {
+    background-color: #92eaff;
+    border-color: #b5b5b5;
+    color: #39486f;
+  }
+}
