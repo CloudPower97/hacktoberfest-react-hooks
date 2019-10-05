@@ -73,3 +73,13 @@ button {
     color: #39486f;
   }
 }
+
+ul {
+  list-style: none;
+}
+
+li.bullet {
+  color: #fff922;
+  list-style-type: disc;
+  margin-bottom: 15px;
+}
