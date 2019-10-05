@@ -13,7 +13,7 @@ const AwesomeFunctionalComponent = ({ history }) => {
   const [counter, setCounter] = useState(0)
   const [, setUseless] = useState(false)
   const initialMount = useRef(true)
-  const initialMount2 = useRef(true)
+  const counterMount = useRef(true)
 
   useEffect(() => {
     console.log("I'm an awesome functional component")
@@ -36,12 +36,12 @@ const AwesomeFunctionalComponent = ({ history }) => {
   })
 
   useEffect(() => {
-    const { current } = initialMount2
+    const { current } = counterMount
 
     if (!current) {
       console.log('You will only see this in the console when the counter updates')
     } else {
-      initialMount2.current = false
+      counterMount.current = false
     }
   }, [counter])
 
