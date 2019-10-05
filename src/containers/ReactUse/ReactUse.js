@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { useCounter, useUpdateEffect, useToggle, useEvent, useList } from 'react-use'
+import React, { useEffect, useRef } from 'react'
+import { useCounter, useUpdateEffect, useToggle, useEvent } from 'react-use'
 import { Switch, Route, Redirect, Link } from 'react-router-dom'
 import Star from '../../assets/emoji/star.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,9 +9,11 @@ import {
   faPlusCircle,
   faMinusCircle,
 } from '@fortawesome/free-solid-svg-icons'
+import Tux from '../../assets/img/tux.png'
 
-const List = ({ history }) => {
-  const [list, { set, push, clear, updateAt, remove, filter, sort }] = useList()
+const Fullscreen = ({ history }) => {
+  const ref = useRef(null)
+  const [, toggle] = useToggle(false)
 
   return (
     <div className="boring-class-component-wrapper">
@@ -20,7 +22,7 @@ const List = ({ history }) => {
           display: 'inline-flex',
           alignContent: 'center',
         }}>
-        More hooks!
+        useFullscreen
         <img
           src={Star}
           alt=""
@@ -39,7 +41,7 @@ const List = ({ history }) => {
         <FontAwesomeIcon icon={faArrowLeft} /> Go Back
       </button>
       <Link
-        to="/react-use"
+        to="/axios-hooks"
         style={{
           position: 'absolute',
           right: 0,
@@ -47,20 +49,16 @@ const List = ({ history }) => {
         }}>
         Next! <FontAwesomeIcon icon={faArrowRight} />
       </Link>
-      <ul>
-        {list.map(el => (
-          <li>{el}</li>
-        ))}
-      </ul>
+
+      <img src={Tux} alt="Tux, the Linux mascotte" width={250} ref={ref} />
+
       <div className="boring-class-component-btn-wrapper">
         <button
-          onClick={() => {
-            push(new Date().toDateString())
-          }}
+          onClick={toggle}
           style={{
             width: '25%',
           }}>
-          Push new element
+          Open image in full screen
           <FontAwesomeIcon icon={faPlusCircle} />
         </button>
       </div>
@@ -231,7 +229,7 @@ export default ({ match: { path } }) => (
   <Switch>
     <Route exact path={path} component={ReactUse} />
     <Route path={`${path}/useEvents`} component={Events} />
-    <Route path={`${path}/useList`} component={List} />
+    <Route path={`${path}/useFullscreen`} component={Fullscreen} />
     <Redirect to={path} />
   </Switch>
 )
