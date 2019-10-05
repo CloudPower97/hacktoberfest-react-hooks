@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-// import './BoringClassComponent.scss'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect, useRef } from 'react'
+import { Switch, Route, Redirect, Link } from 'react-router-dom'
 import Star from '../../assets/emoji/star.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -12,6 +11,39 @@ import {
 
 const AwesomeFunctionalComponent = ({ history }) => {
   const [counter, setCounter] = useState(0)
+  const [, setUseless] = useState(false)
+  const initialMount = useRef(true)
+  const initialMount2 = useRef(true)
+
+  useEffect(() => {
+    console.log("I'm an awesome functional component")
+
+    return () => {
+      console.log(
+        'You will see this in the console when the components is going to be removed from the DOM'
+      )
+    }
+  }, [])
+
+  useEffect(() => {
+    const { current } = initialMount
+
+    if (!current) {
+      console.log("You will see this in the console whenever the component updates it's state")
+    } else {
+      initialMount.current = false
+    }
+  })
+
+  useEffect(() => {
+    const { current } = initialMount2
+
+    if (!current) {
+      console.log('You will only see this in the console when the counter updates')
+    } else {
+      initialMount2.current = false
+    }
+  }, [counter])
 
   const handleIncrement = () => {
     setCounter(prev => prev + 1)
@@ -19,6 +51,10 @@ const AwesomeFunctionalComponent = ({ history }) => {
 
   const handleDecrement = () => {
     setCounter(prev => prev - 1)
+  }
+
+  const handleToggle = () => {
+    setUseless(prev => !prev)
   }
 
   return (
@@ -70,6 +106,7 @@ const AwesomeFunctionalComponent = ({ history }) => {
           Increment Counter
           <FontAwesomeIcon icon={faPlusCircle} />
         </button>
+
         <button
           onClick={handleDecrement}
           style={{
@@ -78,9 +115,22 @@ const AwesomeFunctionalComponent = ({ history }) => {
           Decrement Counter
           <FontAwesomeIcon icon={faMinusCircle} />
         </button>
+
+        <button
+          onClick={handleToggle}
+          style={{
+            width: '25%',
+          }}>
+          Trigger a fake update of the component
+        </button>
       </div>
     </div>
   )
 }
 
-export default AwesomeFunctionalComponent
+export default ({ location: { pathname } }) => (
+  <Switch>
+    <Route path={pathname} component={AwesomeFunctionalComponent} />
+    <Redirect to={pathname} />
+  </Switch>
+)

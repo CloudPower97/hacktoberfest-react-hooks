@@ -12,9 +12,9 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={App} />
-      <Route exact path="/boring-class-component" component={BoringClassComponent} />
-      <Route exact path="/awesome-functional-component" component={AwesomeFunctionalComponent} />
-      <Route exact path="/react-use" component={ReactUse} />
+      <Route path="/boring-class-component" component={BoringClassComponent} />
+      <Route path="/awesome-functional-component" component={AwesomeFunctionalComponent} />
+      <Route path="/react-use" component={ReactUse} />
       <Redirect to="/" />
     </Switch>
   </BrowserRouter>,

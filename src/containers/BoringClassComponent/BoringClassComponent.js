@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './BoringClassComponent.scss'
-import { Link } from 'react-router-dom'
+import { Switch, Route, Redirect, Link } from 'react-router-dom'
 import Bored from '../../assets/emoji/bored.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -10,21 +10,75 @@ import {
   faMinusCircle,
 } from '@fortawesome/free-solid-svg-icons'
 
-export default class BoringClassComponent extends Component {
+class BoringClassComponent extends Component {
+  // * Old Fashion Code Style :P
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     counter: 0
+  //   }
+  //   this.handleIncrement = this.handleIncrement.bind(this)
+  //   this.handleDecrement = this.handleDecrement.bind(this)
+  //   this.handleToggle = this.handleToggle.bind(this)
+  // }
+  //
+  // handleIncrement(delta) {
+  //   this.setState(prevState => ({
+  //     counter: prevState.counter + delta,
+  //   }))
+  // }
+  //
+  // handleDecrement(delta) {
+  //   this.setState(prevState => ({
+  //     counter: prevState.counter - delta,
+  //   }))
+  // }
+  //
+  // handleToggle() {
+  //   this.setState(prevState => ({
+  //     useless: !prevState.useless,
+  //   }))
+  // }
+
   state = {
     counter: 0,
+    useless: false,
   }
 
-  handleIncrement = () => {
+  handleIncrement = (delta = 1) => {
     this.setState(prevState => ({
-      counter: prevState.counter + 1,
+      counter: prevState.counter + delta,
     }))
   }
 
-  handleDecrement = () => {
+  handleDecrement = (delta = 1) => {
     this.setState(prevState => ({
-      counter: prevState.counter - 1,
+      counter: prevState.counter - delta,
     }))
+  }
+
+  handleToggle = () => {
+    this.setState(prevState => ({
+      useless: !prevState.useless,
+    }))
+  }
+
+  componentDidMount() {
+    console.log("I'm a boring class component!")
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("You will see this in the console whenever the component updates it's state")
+
+    if (prevState.counter !== this.state.counter) {
+      console.log('You will only see this in the console when the counter updates')
+    }
+  }
+
+  componentWillUnmount() {
+    console.log(
+      'You will see this in the console when the components is going to be removed from the DOM'
+    )
   }
 
   render() {
@@ -34,7 +88,6 @@ export default class BoringClassComponent extends Component {
     return (
       <div className="boring-class-component-wrapper">
         <h1>
-          {' '}
           Boring Class Component...{' '}
           <img
             src={Bored}
@@ -70,23 +123,39 @@ export default class BoringClassComponent extends Component {
         </p>
         <div className="boring-class-component-btn-wrapper">
           <button
-            onClick={this.handleIncrement}
+            onClick={() => this.handleIncrement()}
             style={{
               width: '25%',
             }}>
             Increment Counter
             <FontAwesomeIcon icon={faPlusCircle} />
           </button>
+
           <button
-            onClick={this.handleDecrement}
+            onClick={() => this.handleDecrement()}
             style={{
               width: '25%',
             }}>
             Decrement Counter
             <FontAwesomeIcon icon={faMinusCircle} />
           </button>
+
+          <button
+            onClick={() => this.handleToggle()}
+            style={{
+              width: '25%',
+            }}>
+            Trigger a fake update of the component
+          </button>
         </div>
       </div>
     )
   }
 }
+
+export default ({ location: { pathname } }) => (
+  <Switch>
+    <Route to={pathname} component={BoringClassComponent} />
+    <Redirect to={pathname} />
+  </Switch>
+)
