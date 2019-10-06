@@ -8,12 +8,14 @@ import {
   faPlusCircle,
   faMinusCircle,
 } from '@fortawesome/free-solid-svg-icons'
+import useAbstract from './useAbstract'
 
 const AwesomeFunctionalComponent = ({ history }) => {
   const [counter, setCounter] = useState(0)
   const [, setUseless] = useState(false)
   const initialMount = useRef(true)
   const counterMount = useRef(true)
+  const customHook = useAbstract()
 
   useEffect(() => {
     console.log("I'm an awesome functional component")
@@ -44,6 +46,10 @@ const AwesomeFunctionalComponent = ({ history }) => {
       counterMount.current = false
     }
   }, [counter])
+
+  useEffect(() => {
+    console.log(customHook)
+  }, [customHook])
 
   const handleIncrement = () => {
     setCounter(prev => prev + 1)
