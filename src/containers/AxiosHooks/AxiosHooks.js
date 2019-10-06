@@ -1,10 +1,20 @@
 import React from 'react'
 import { Switch, Route, Redirect, Link } from 'react-router-dom'
 import { useList, useUpdateEffect } from 'react-use'
-import Star from '../../assets/emoji/star.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faArrowRight, faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowLeft,
+  faArrowRight,
+  faPlusCircle,
+  faCircleNotch,
+  faSyncAlt,
+  faCloudDownloadAlt,
+  faFilter,
+  faSortAlphaUp,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons'
 import useAxios from 'axios-hooks'
+import LoveYou from '../../assets/emoji/love-you.png'
 
 const AxiosHook = ({ history }) => {
   const [{ data: posts, error: errorPosts, loading: loadingPosts }, refetchPosts] = useAxios(
@@ -32,7 +42,7 @@ const AxiosHook = ({ history }) => {
         }}>
         Axios Hooks
         <img
-          src={Star}
+          src={LoveYou}
           alt=""
           style={{
             height: 40,
@@ -57,73 +67,71 @@ const AxiosHook = ({ history }) => {
         }}>
         Next! <FontAwesomeIcon icon={faArrowRight} />
       </Link>
-      {loadingUsers && <p>Loading Users</p>}
-      {users && (
-        <ul>
-          {list.map(({ name }, index) => (
-            <li key={index} className="bullet">
-              <span
-                style={{
-                  color: 'white',
-                }}>
-                {name}
-              </span>
-            </li>
-          ))}
-        </ul>
+      {(loadingUsers || loadingPosts) && (
+        <FontAwesomeIcon
+          icon={faCircleNotch}
+          spin
+          size="5x"
+          // style={{
+          //   position: 'absolute',
+          //   top: '50%',
+          //   left: '50%',
+          //   transform: 'translate(-50%, -50%)',
+          // }}
+        />
       )}
-      <div className="boring-class-component-btn-wrapper">
-        <button
-          style={{
-            width: '25%',
-          }}
-          onClick={refetchPosts}>
+      <div
+        style={{
+          maxHeight: '40%',
+          overflowY: 'auto',
+        }}>
+        {users && (
+          <ul>
+            {list.map(({ name }, index) => (
+              <li key={index} className="bullet">
+                <span
+                  style={{
+                    color: 'white',
+                  }}>
+                  {name}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div className="btn-wrapper">
+        <button onClick={refetchPosts}>
           Refetch Posts
-          <FontAwesomeIcon icon={faPlusCircle} />
+          <FontAwesomeIcon icon={faSyncAlt} />
         </button>
-        <button
-          style={{
-            width: '25%',
-          }}
-          onClick={fetchUser}>
+        <button onClick={fetchUser}>
           Fetch Users
-          <FontAwesomeIcon icon={faPlusCircle} />
+          <FontAwesomeIcon icon={faCloudDownloadAlt} />
         </button>
         <button
           onClick={() => {
-            push(new Date().toDateString())
+            push({ name: 'Claudio Cortese' })
           }}
-          style={{
-            width: '25%',
-          }}>
-          Push new element
+          disabled={!users}>
+          New element
           <FontAwesomeIcon icon={faPlusCircle} />
         </button>
 
-        <button
-          onClick={clear}
-          style={{
-            width: '25%',
-          }}>
-          Clear all elements
-          <FontAwesomeIcon icon={faPlusCircle} />
+        <button onClick={clear}>
+          Clear elements
+          <FontAwesomeIcon icon={faTrashAlt} />
         </button>
 
-        <button
-          onClick={() => filter(user => user.name[0] === 'C')}
-          style={{
-            width: '25%',
-          }}>
+        <button onClick={() => filter(user => user.name[0] === 'C')}>
           Filter elements
-          <FontAwesomeIcon icon={faPlusCircle} />
+          <FontAwesomeIcon icon={faFilter} />
         </button>
 
-        <button
-          style={{
-            width: '25%',
-          }}>
+        <button onClick={() => sort((a, b) => b > a)}>
           Sort elements
-          <FontAwesomeIcon icon={faPlusCircle} />
+          <FontAwesomeIcon icon={faSortAlphaUp} />
         </button>
       </div>
     </div>

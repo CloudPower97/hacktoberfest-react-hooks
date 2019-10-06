@@ -1,3 +1,22 @@
+::selection {
+  background-color: #a11ec6;
+  color: white;
+}
+
+::-webkit-scrollbar {
+  height: 5px;
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a11ec6;
+  border-radius: 6px;
+}
+
 body {
   background-color: #152347;
   background-image: url(./assets/img/bg-left.png), url(./assets/img/bg-right.png);
@@ -5,11 +24,12 @@ body {
   background-size: contain;
   color: white;
   font-family: 'Space Mono', monospace;
+  font-size: x-large;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
   margin: 0;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 code {
@@ -30,6 +50,10 @@ code {
   position: absolute;
   right: 40px;
   width: 350px;
+
+  @media only screen and (max-width: 992px) {
+    display: none;
+  }
 }
 
 a,
@@ -65,6 +89,7 @@ button {
   user-select: none;
   vertical-align: top;
   white-space: nowrap;
+  min-width: 180px;
 
   &:hover,
   &:focus {
@@ -82,4 +107,21 @@ li.bullet {
   color: #fff922;
   list-style-type: disc;
   margin-bottom: 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-align: center;
+}
+
+.btn-wrapper {
+  column-gap: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  row-gap: 40px;
 }

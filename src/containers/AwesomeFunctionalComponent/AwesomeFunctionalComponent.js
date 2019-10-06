@@ -103,21 +103,13 @@ const AwesomeFunctionalComponent = ({ history }) => {
         }}>
         Click Count: {counter}
       </p>
-      <div className="boring-class-component-btn-wrapper">
-        <button
-          onClick={handleIncrement}
-          style={{
-            width: '25%',
-          }}>
+      <div className="btn-wrapper">
+        <button onClick={handleIncrement}>
           Increment Counter
           <FontAwesomeIcon icon={faPlusCircle} />
         </button>
 
-        <button
-          onClick={handleDecrement}
-          style={{
-            width: '25%',
-          }}>
+        <button onClick={handleDecrement}>
           Decrement Counter
           <FontAwesomeIcon icon={faMinusCircle} />
         </button>
@@ -125,7 +117,10 @@ const AwesomeFunctionalComponent = ({ history }) => {
         <button
           onClick={handleToggle}
           style={{
-            width: '25%',
+            columnSpan: 'all',
+            gridColumnEnd: 3,
+            gridColumnStart: 1,
+            justifySelf: 'stretch',
           }}>
           Trigger a fake update of the component
         </button>

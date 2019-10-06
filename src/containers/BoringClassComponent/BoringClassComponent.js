@@ -121,21 +121,13 @@ class BoringClassComponent extends Component {
           }}>
           Click Count: {counter}
         </p>
-        <div className="boring-class-component-btn-wrapper">
-          <button
-            onClick={() => this.handleIncrement()}
-            style={{
-              width: '25%',
-            }}>
+        <div className="btn-wrapper">
+          <button onClick={() => this.handleIncrement()}>
             Increment Counter
             <FontAwesomeIcon icon={faPlusCircle} />
           </button>
 
-          <button
-            onClick={() => this.handleDecrement()}
-            style={{
-              width: '25%',
-            }}>
+          <button onClick={() => this.handleDecrement()}>
             Decrement Counter
             <FontAwesomeIcon icon={faMinusCircle} />
           </button>
@@ -143,7 +135,10 @@ class BoringClassComponent extends Component {
           <button
             onClick={() => this.handleToggle()}
             style={{
-              width: '25%',
+              columnSpan: 'all',
+              gridColumnEnd: 3,
+              gridColumnStart: 1,
+              justifySelf: 'stretch',
             }}>
             Trigger a fake update of the component
           </button>

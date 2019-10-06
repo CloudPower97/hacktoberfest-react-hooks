@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useCounter, useUpdateEffect, useToggle, useEvent, useFullscreen } from 'react-use'
 import { Switch, Route, Redirect, Link } from 'react-router-dom'
-import Star from '../../assets/emoji/star.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowLeft,
@@ -10,6 +9,10 @@ import {
   faMinusCircle,
 } from '@fortawesome/free-solid-svg-icons'
 import Tux from '../../assets/img/tux.png'
+import OneHundred from '../../assets/emoji/100.png'
+import CallMeHand from '../../assets/emoji/call-me-hand.png'
+import Cool from '../../assets/emoji/cool.png'
+import Ok from '../../assets/emoji/ok.png'
 
 const Fullscreen = ({ history }) => {
   const ref = useRef(null)
@@ -26,8 +29,8 @@ const Fullscreen = ({ history }) => {
         }}>
         useFullscreen
         <img
-          src={Star}
-          alt=""
+          src={OneHundred}
+          alt="100"
           style={{
             height: 40,
           }}
@@ -54,11 +57,14 @@ const Fullscreen = ({ history }) => {
 
       <img src={Tux} alt="Tux, the Linux mascotte" width={250} ref={ref} />
 
-      <div className="boring-class-component-btn-wrapper">
+      <div className="btn-wrapper">
         <button
           onClick={toggle}
           style={{
-            width: '25%',
+            columnSpan: 'all',
+            gridColumnEnd: 3,
+            gridColumnStart: 1,
+            justifySelf: 'stretch',
           }}>
           Open image in full screen
           <FontAwesomeIcon icon={faPlusCircle} />
@@ -69,9 +75,15 @@ const Fullscreen = ({ history }) => {
 }
 
 const Events = ({ history }) => {
+  const [catchCount, { inc }] = useCounter(0)
+
   useEvent('abstract-hacktoberfest', () => {
-    console.log('Custom event catched!')
+    inc(1)
   })
+
+  useUpdateEffect(() => {
+    console.log(`Custom event emitted ${catchCount} times!`)
+  }, [catchCount])
 
   return (
     <div className="boring-class-component-wrapper">
@@ -80,15 +92,16 @@ const Events = ({ history }) => {
           display: 'inline-flex',
           alignContent: 'center',
         }}>
-        More hooks!
+        useEvent
         <img
-          src={Star}
+          src={Cool}
           alt=""
           style={{
             height: 40,
           }}
         />
       </h1>
+      <p>Event emitted {catchCount} times</p>
       <button
         onClick={history.goBack}
         style={{
@@ -107,14 +120,17 @@ const Events = ({ history }) => {
         }}>
         Next! <FontAwesomeIcon icon={faArrowRight} />
       </Link>
-      <div className="boring-class-component-btn-wrapper">
+      <div className="btn-wrapper">
         <button
           onClick={() => {
             const event = new Event('abstract-hacktoberfest')
             window.dispatchEvent(event)
           }}
           style={{
-            width: '25%',
+            columnSpan: 'all',
+            gridColumnEnd: 3,
+            gridColumnStart: 1,
+            justifySelf: 'stretch',
           }}>
           Dispatch event
           <FontAwesomeIcon icon={faPlusCircle} />
@@ -124,7 +140,7 @@ const Events = ({ history }) => {
   )
 }
 
-const ReactUse = ({ history }) => {
+const Counter = ({ history }) => {
   const [counter, { inc, dec, set, reset }] = useCounter(0)
   const [, toggleUseless] = useToggle(false)
 
@@ -147,9 +163,9 @@ const ReactUse = ({ history }) => {
           display: 'inline-flex',
           alignContent: 'center',
         }}>
-        Awesome Functional Component!
+        useCounter
         <img
-          src={Star}
+          src={CallMeHand}
           alt=""
           style={{
             height: 40,
@@ -180,45 +196,28 @@ const ReactUse = ({ history }) => {
         }}>
         Click Count: {counter}
       </p>
-      <div className="boring-class-component-btn-wrapper">
-        <button
-          onClick={() => inc(1)}
-          style={{
-            width: '25%',
-          }}>
+      <div className="btn-wrapper">
+        <button onClick={() => inc(1)}>
           Increment Counter
           <FontAwesomeIcon icon={faPlusCircle} />
         </button>
 
-        <button
-          onClick={() => dec(1)}
-          style={{
-            width: '25%',
-          }}>
+        <button onClick={() => dec(1)}>
           Decrement Counter
           <FontAwesomeIcon icon={faMinusCircle} />
         </button>
 
-        <button
-          onClick={() => set(10)}
-          style={{
-            width: '25%',
-          }}>
-          Set counter to 10
-        </button>
+        <button onClick={() => set(10)}>Set counter to 10</button>
 
-        <button
-          onClick={reset}
-          style={{
-            width: '25%',
-          }}>
-          Reset
-        </button>
+        <button onClick={reset}>Reset</button>
 
         <button
           onClick={toggleUseless}
           style={{
-            width: '25%',
+            columnSpan: 'all',
+            gridColumnEnd: 3,
+            gridColumnStart: 1,
+            justifySelf: 'stretch',
           }}>
           Trigger a fake update of the component
         </button>
@@ -227,9 +226,55 @@ const ReactUse = ({ history }) => {
   )
 }
 
+const Intro = ({ history }) => {
+  return (
+    <div>
+      <h1
+        style={{
+          display: 'inline-flex',
+          alignContent: 'center',
+        }}>
+        react-use
+        <img
+          src={Ok}
+          alt=""
+          style={{
+            height: 40,
+          }}
+        />
+      </h1>
+
+      <p>Collection of essential React Hooks.</p>
+      <p>You will find the source code on GitHub</p>
+      <code>npm i react-use</code>
+      <p>OR</p>
+      <code>yarn add react-use</code>
+      <button
+        onClick={history.goBack}
+        style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+        }}>
+        <FontAwesomeIcon icon={faArrowLeft} /> Go Back
+      </button>
+      <Link
+        to="/react-use/useCounter"
+        style={{
+          position: 'absolute',
+          right: 0,
+          top: 0,
+        }}>
+        Next! <FontAwesomeIcon icon={faArrowRight} />
+      </Link>
+    </div>
+  )
+}
+
 export default ({ match: { path } }) => (
   <Switch>
-    <Route exact path={path} component={ReactUse} />
+    <Route exact path={path} component={Intro} />
+    <Route exact path={`${path}/useCounter`} component={Counter} />
     <Route path={`${path}/useEvents`} component={Events} />
     <Route path={`${path}/useFullscreen`} component={Fullscreen} />
     <Redirect to={path} />
