@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { useCounter, useUpdateEffect, useToggle, useEvent } from 'react-use'
+import { useCounter, useUpdateEffect, useToggle, useEvent, useFullscreen } from 'react-use'
 import { Switch, Route, Redirect, Link } from 'react-router-dom'
 import Star from '../../assets/emoji/star.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -13,7 +13,9 @@ import Tux from '../../assets/img/tux.png'
 
 const Fullscreen = ({ history }) => {
   const ref = useRef(null)
-  const [, toggle] = useToggle(false)
+  const [show, toggle] = useToggle(false)
+
+  useFullscreen(ref, show, { onClose: () => toggle(false) })
 
   return (
     <div className="boring-class-component-wrapper">
@@ -97,7 +99,7 @@ const Events = ({ history }) => {
         <FontAwesomeIcon icon={faArrowLeft} /> Go Back
       </button>
       <Link
-        to="/react-use/useList"
+        to="/react-use/useFullscreen"
         style={{
           position: 'absolute',
           right: 0,
