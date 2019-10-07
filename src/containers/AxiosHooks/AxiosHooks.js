@@ -27,7 +27,7 @@ const AxiosHook = ({ history }) => {
     }
   )
 
-  const [list, { set, push, clear, updateAt, remove, filter, sort }] = useList()
+  const [list, { set, push, clear, filter, sort }] = useList()
 
   useUpdateEffect(() => {
     set(users)
@@ -40,7 +40,7 @@ const AxiosHook = ({ history }) => {
           display: 'inline-flex',
           alignContent: 'center',
         }}>
-        Axios Hooks
+        axios-hooks
         <img
           src={LoveYou}
           alt=""
@@ -59,7 +59,7 @@ const AxiosHook = ({ history }) => {
         <FontAwesomeIcon icon={faArrowLeft} /> Go Back
       </button>
       <Link
-        to="/react-use/events"
+        to="/greetings"
         style={{
           position: 'absolute',
           right: 0,
@@ -67,25 +67,13 @@ const AxiosHook = ({ history }) => {
         }}>
         Next! <FontAwesomeIcon icon={faArrowRight} />
       </Link>
-      {(loadingUsers || loadingPosts) && (
-        <FontAwesomeIcon
-          icon={faCircleNotch}
-          spin
-          size="5x"
-          // style={{
-          //   position: 'absolute',
-          //   top: '50%',
-          //   left: '50%',
-          //   transform: 'translate(-50%, -50%)',
-          // }}
-        />
-      )}
+      {(loadingUsers || loadingPosts) && <FontAwesomeIcon icon={faCircleNotch} spin size="2x" />}
       <div
         style={{
           maxHeight: '40%',
           overflowY: 'auto',
         }}>
-        {users && (
+        {!loadingUsers && users && (
           <ul>
             {list.map(({ name }, index) => (
               <li key={index} className="bullet">
@@ -106,10 +94,12 @@ const AxiosHook = ({ history }) => {
           Refetch Posts
           <FontAwesomeIcon icon={faSyncAlt} />
         </button>
+
         <button onClick={fetchUser}>
           Fetch Users
           <FontAwesomeIcon icon={faCloudDownloadAlt} />
         </button>
+
         <button
           onClick={() => {
             push({ name: 'Claudio Cortese' })
@@ -119,17 +109,34 @@ const AxiosHook = ({ history }) => {
           <FontAwesomeIcon icon={faPlusCircle} />
         </button>
 
-        <button onClick={clear}>
+        <button onClick={clear} disabled={!users}>
           Clear elements
           <FontAwesomeIcon icon={faTrashAlt} />
         </button>
 
-        <button onClick={() => filter(user => user.name[0] === 'C')}>
+        <button onClick={() => filter(user => user.name[0] === 'C')} disabled={!users}>
           Filter elements
           <FontAwesomeIcon icon={faFilter} />
         </button>
 
-        <button onClick={() => sort((a, b) => b > a)}>
+        <button
+          onClick={() =>
+            sort((a, b) => {
+              const nameA = a.name.toUpperCase() // ignore upper and lowercase
+              const nameB = b.name.toUpperCase() // ignore upper and lowercase
+
+              if (nameA < nameB) {
+                return -1
+              }
+              if (nameA > nameB) {
+                return 1
+              }
+
+              // names must be equal
+              return 0
+            })
+          }
+          disabled={!users}>
           Sort elements
           <FontAwesomeIcon icon={faSortAlphaUp} />
         </button>

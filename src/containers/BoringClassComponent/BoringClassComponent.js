@@ -8,6 +8,7 @@ import {
   faArrowRight,
   faPlusCircle,
   faMinusCircle,
+  faSyncAlt,
 } from '@fortawesome/free-solid-svg-icons'
 
 class BoringClassComponent extends Component {
@@ -141,6 +142,7 @@ class BoringClassComponent extends Component {
               justifySelf: 'stretch',
             }}>
             Trigger a fake update of the component
+            <FontAwesomeIcon icon={faSyncAlt} />
           </button>
         </div>
       </div>

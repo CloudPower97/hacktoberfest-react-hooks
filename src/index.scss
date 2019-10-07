@@ -77,6 +77,7 @@ button {
   height: 2.25em;
   justify-content: center;
   line-height: 1.5;
+  min-width: 180px;
   padding-bottom: 1.125em;
   padding-left: 2em;
   padding-right: 2em;
@@ -89,13 +90,19 @@ button {
   user-select: none;
   vertical-align: top;
   white-space: nowrap;
-  min-width: 180px;
 
-  &:hover,
-  &:focus {
-    background-color: #92eaff;
-    border-color: #b5b5b5;
-    color: #39486f;
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      background-color: #92eaff;
+      border-color: #b5b5b5;
+      color: #39486f;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    filter: brightness(0.5);
   }
 }
 

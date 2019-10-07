@@ -7,6 +7,9 @@ import {
   faArrowRight,
   faPlusCircle,
   faMinusCircle,
+  faSyncAlt,
+  faRetweet,
+  faEquals,
 } from '@fortawesome/free-solid-svg-icons'
 import Tux from '../../assets/img/tux.png'
 import OneHundred from '../../assets/emoji/100.png'
@@ -207,9 +210,15 @@ const Counter = ({ history }) => {
           <FontAwesomeIcon icon={faMinusCircle} />
         </button>
 
-        <button onClick={() => set(10)}>Set counter to 10</button>
+        <button onClick={() => set(10)}>
+          Set counter to 10
+          <FontAwesomeIcon icon={faEquals} />
+        </button>
 
-        <button onClick={reset}>Reset</button>
+        <button onClick={reset}>
+          Reset
+          <FontAwesomeIcon icon={faRetweet} />
+        </button>
 
         <button
           onClick={toggleUseless}
@@ -220,6 +229,7 @@ const Counter = ({ history }) => {
             justifySelf: 'stretch',
           }}>
           Trigger a fake update of the component
+          <FontAwesomeIcon icon={faSyncAlt} />
         </button>
       </div>
     </div>
@@ -228,7 +238,11 @@ const Counter = ({ history }) => {
 
 const Intro = ({ history }) => {
   return (
-    <div>
+    <div
+      className="boring-class-component-wrapper"
+      style={{
+        justifyContent: 'center',
+      }}>
       <h1
         style={{
           display: 'inline-flex',

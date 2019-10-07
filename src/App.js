@@ -6,6 +6,59 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import Thinking from './assets/emoji/thinking.png'
 import Nerd from './assets/emoji/nerd.png'
 import LightBulb from './assets/emoji/light-bulb.png'
+import Books from './assets/emoji/books.png'
+
+const QuickRecap = ({ history }) => (
+  <>
+    <h1
+      style={{
+        fontFamily: "'Inconsolata', monospace",
+      }}>
+      A quick recap <img src={Books} alt="Books" />
+    </h1>
+    <button
+      onClick={history.goBack}
+      style={{
+        position: 'absolute',
+        left: 0,
+        top: 0,
+      }}>
+      <FontAwesomeIcon icon={faArrowLeft} /> Go Back
+    </button>
+    <Link
+      to="/boring-class-component"
+      style={{
+        position: 'absolute',
+        right: 0,
+        top: 0,
+      }}>
+      Next! <FontAwesomeIcon icon={faArrowRight} />
+    </Link>
+
+    <div
+      style={{
+        padding: 25,
+        overflowY: 'auto',
+        height: '55%',
+      }}>
+      <p>
+        You should be already familiar with at least Array Destructuring and Object Destructuring
+      </p>
+    </div>
+
+    <div className="btn-wrapper">
+      <Link
+        to="/boring-class-component"
+        style={{
+          columnSpan: 'all',
+          gridColumnEnd: 3,
+          gridColumnStart: 1,
+        }}>
+        Without any further do, let's start coding together!
+      </Link>
+    </div>
+  </>
+)
 
 const WhatYouWillLearn = ({ history }) => (
   <>
@@ -25,7 +78,7 @@ const WhatYouWillLearn = ({ history }) => (
       <FontAwesomeIcon icon={faArrowLeft} /> Go Back
     </button>
     <Link
-      to="/boring-class-component"
+      to="recap"
       style={{
         position: 'absolute',
         right: 0,
@@ -57,18 +110,6 @@ const WhatYouWillLearn = ({ history }) => (
         In full <code>Hacktoberfest</code> spirit, I encourage you to contribute to these{' '}
         <code>FOSS</code> packages.
       </p>
-    </div>
-
-    <div className="btn-wrapper">
-      <Link
-        to="/boring-class-component"
-        style={{
-          columnSpan: 'all',
-          gridColumnEnd: 3,
-          gridColumnStart: 1,
-        }}>
-        Without any further do, let's start coding together!
-      </Link>
     </div>
   </>
 )
@@ -255,6 +296,7 @@ export default ({ match: { path } }) => (
     <Route path={`${path}/no-breaking-changes`} component={HooksIntroduction} />
     <Route path={`${path}/motivation`} component={HooksMotivation} />
     <Route path={`${path}/what-you-will-learn`} component={WhatYouWillLearn} />
+    <Route path={`${path}/recap`} component={QuickRecap} />
     <Redirect to={path} />
   </Switch>
 )

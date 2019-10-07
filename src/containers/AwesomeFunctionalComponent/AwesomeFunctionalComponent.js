@@ -7,6 +7,7 @@ import {
   faArrowRight,
   faPlusCircle,
   faMinusCircle,
+  faSyncAlt,
 } from '@fortawesome/free-solid-svg-icons'
 import useAbstract from './useAbstract'
 
@@ -123,6 +124,7 @@ const AwesomeFunctionalComponent = ({ history }) => {
             justifySelf: 'stretch',
           }}>
           Trigger a fake update of the component
+          <FontAwesomeIcon icon={faSyncAlt} />
         </button>
       </div>
     </div>
