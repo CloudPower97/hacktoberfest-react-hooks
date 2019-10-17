@@ -7,6 +7,11 @@ import Thinking from './assets/emoji/thinking.png'
 import Nerd from './assets/emoji/nerd.png'
 import LightBulb from './assets/emoji/light-bulb.png'
 import Books from './assets/emoji/books.png'
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
+import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript'
+import vs from 'react-syntax-highlighter/dist/esm/styles/hljs/vs2015'
+
+SyntaxHighlighter.registerLanguage('javascript', js)
 
 const QuickRecap = ({ history }) => (
   <>
@@ -14,7 +19,7 @@ const QuickRecap = ({ history }) => (
       style={{
         fontFamily: "'Inconsolata', monospace",
       }}>
-      A quick recap <img src={Books} alt="Books" />
+      A quick brushup <img src={Books} alt="Books" />
     </h1>
     <button
       onClick={history.goBack}
@@ -42,8 +47,25 @@ const QuickRecap = ({ history }) => (
         height: '55%',
       }}>
       <p>
-        You should be already familiar with at least Array Destructuring and Object Destructuring
+        You should be already familiar with at least Array Destructuring and Object Destructuring.
       </p>
+      <SyntaxHighlighter language="javascript" style={vs}>
+        {`const arrayOfPeople = ["Claudio Cortese 👨‍💻", "Ivan Di Luccio 👨‍💻", "Rosario Savarese 😎", "Stefania Scolamiero 🖌️"]
+const company = {
+  name: "Abstract Technology",
+  headquarter: {
+    city: "Naples",
+    country: "Italy",
+    address: "Via Cervantes 55, 80133"
+  }
+}
+
+const [me, , theBoss,] = arrayOfPeople
+const {name : companyName, headquarter: {
+  country,
+  address : companyAddress
+}} = company`}
+      </SyntaxHighlighter>
     </div>
 
     <div className="btn-wrapper">

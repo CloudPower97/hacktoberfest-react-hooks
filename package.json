@@ -34,6 +34,7 @@
     "react-materialize": "^3.4.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
+    "react-syntax-highlighter": "^11.0.2",
     "react-use": "^12.2.2"
   },
   "devDependencies": {
