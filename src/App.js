@@ -10,6 +10,7 @@ import Books from './assets/emoji/books.png'
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
 import js from 'react-syntax-highlighter/dist/esm/languages/hljs/javascript'
 import vs from 'react-syntax-highlighter/dist/esm/styles/hljs/vs2015'
+import me from './assets/img/me.jpeg'
 
 SyntaxHighlighter.registerLanguage('javascript', js)
 
@@ -21,6 +22,7 @@ const QuickRecap = ({ history }) => (
       }}>
       A quick brushup <img src={Books} alt="Books" />
     </h1>
+
     <button
       onClick={history.goBack}
       style={{
@@ -30,6 +32,7 @@ const QuickRecap = ({ history }) => (
       }}>
       <FontAwesomeIcon icon={faArrowLeft} /> Go Back
     </button>
+
     <Link
       to="/boring-class-component"
       style={{
@@ -287,6 +290,76 @@ const HooksIntroduction = ({ history }) => (
   </>
 )
 
+const WhoAmI = ({ history }) => (
+  <>
+    <h1>
+      Who am I? 👨‍💻
+    </h1>
+
+    <button
+      onClick={history.goBack}
+      style={{
+        position: 'absolute',
+        left: 0,
+        top: 0,
+      }}>
+      <FontAwesomeIcon icon={faArrowLeft} /> Go Back
+    </button>
+
+    <Link
+      to="motivation"
+      style={{
+        position: 'absolute',
+        right: 0,
+        top: 0,
+      }}>
+      Next! <FontAwesomeIcon icon={faArrowRight} />
+    </Link>
+
+    <div
+      style={{
+        padding: 90,
+        overflowY: 'auto',
+        height: '55%',
+      }}>
+      <div style={{
+        position: 'relative'
+      }}>
+        <img src={me} alt="Claudio Cortese, Full Stack Developer@Abstract Technology" style={{
+          position: 'absolute',
+          borderRadius: '50%',
+          right: -30,
+          top: -90,
+          zIndex: 1,
+        }} />
+
+        <SyntaxHighlighter language="javascript" style={vs}>
+          {`{
+  "name": "Claudio",
+  "surname": "Cortese",
+  "legs": 2,
+  "nickname": "CloudPower97",
+  "age": ${new Date().getFullYear() - new Date('01/18/1997').getFullYear()},
+  "email": "claudio.cortese@abstract-technology.com",
+  "job": "Full Stack Developer@Abstract Technology",
+  "enemies": ['Java 💩 (and my girlfirend as a consequence 🤦‍♂️)', 'bugs 🐞'],
+  "favouriteFood": "Whopper 🍔(If you enjoy my workshop you can offer me one at the nearest BK)",
+  "music": [
+    'Michael JSON',
+    'Foo Bar Fighters',
+    'Depeche Code',
+    'Nicky MinAJAX',
+    'Kanye Test',
+    'Queens of the NODE Age',
+  ],
+}`}
+        </SyntaxHighlighter>
+      </div>
+
+    </div>
+  </>
+)
+
 const App = ({ match: { path } }) => (
   <div className="App">
     <header className="App-header">
@@ -299,7 +372,7 @@ const App = ({ match: { path } }) => (
       </h1>
       <div className="btn-wrapper">
         <Link
-          to={`${path}/no-breaking-changes`}
+          to={`${path}/who-am-i`}
           style={{
             columnSpan: 'all',
             gridColumnEnd: 3,
@@ -315,6 +388,7 @@ const App = ({ match: { path } }) => (
 export default ({ match: { path } }) => (
   <Switch>
     <Route exact path={path} component={App} />
+    <Route path={`${path}/who-am-i`} component={WhoAmI} />
     <Route path={`${path}/no-breaking-changes`} component={HooksIntroduction} />
     <Route path={`${path}/motivation`} component={HooksMotivation} />
     <Route path={`${path}/what-you-will-learn`} component={WhatYouWillLearn} />
